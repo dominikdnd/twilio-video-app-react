@@ -2,9 +2,6 @@ runtime: nodejs12
 
 entrypoint: npm run server
 
-env_variables:
-  REACT_APP_SET_AUTH: 'firebase'
-
 handlers:
   - url: /.*
     secure: always
