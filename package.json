@@ -53,6 +53,7 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/react-hooks": "^3.2.1",
@@ -93,7 +94,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --browser chrome",
     "cypress:ci": "cross-env CYPRESS_baseUrl=http://localhost:8081 start-server-and-test server http://localhost:8081 cypress:run",
-    "deploy:twilio-cli": "cross-env REACT_APP_SET_AUTH=passcode npm run build && twilio rtc:apps:video:deploy --authentication=passcode --app-directory ./build"
+    "deploy:twilio-cli": "cross-env REACT_APP_SET_AUTH=firebase npm run build && twilio rtc:apps:video:deploy --authentication=firebase --app-directory ./build"
   },
   "eslintConfig": {
     "extends": "react-app",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactNode } from 'react-transition-group/node_modules/@types/react';
+// import { ReactNode } from 'react-transition-group/node_modules/@types/react';
 import { UserGroup } from 'types';
 import { startSession } from 'utils/firebase/session';
 import useSessionContext from '../hooks/useSessionContext';
@@ -7,7 +7,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { PopupScreen } from './PopupScreen';
 import { ISessionStatus } from './SessionProvider';
 
-export const SessionWrapper = (props: { children: ReactNode }) => {
+export const SessionWrapper = (props: { children: any }) => {
   const { sessionStatus, loading, userGroup, groupToken } = useSessionContext();
 
   if (loading) {
