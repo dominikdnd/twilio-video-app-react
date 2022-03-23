@@ -13,6 +13,7 @@ import { generateIdentity } from 'utils/participants';
 import { setRoomSid } from 'utils/firebase/session';
 import { UserGroup } from 'types/UserGroup';
 import { LOCAL_STORAGE_KEY } from 'types/LocalStorage';
+import useLocalVideoToggle from 'hooks/useLocalVideoToggle/useLocalVideoToggle';
 
 export enum Steps {
   roomNameStep,
@@ -22,6 +23,7 @@ export enum Steps {
 export default function PreJoinScreens(props: { onReady?: (name: string) => void }) {
   const { user } = useAppState();
   const { getAudioAndVideoTracks } = useVideoContext();
+  const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
   const [step, setStep] = useState(Steps.roomNameStep);
   const [mediaError, setMediaError] = useState<Error>();
   const { roomId, userGroup, groupToken } = useSessionContext();
@@ -109,6 +111,14 @@ export default function PreJoinScreens(props: { onReady?: (name: string) => void
       handleJoin();
     }
   }, [userGroup, roomId]);
+
+  useEffect(() => {
+    console.log(userGroup);
+    if (userGroup === UserGroup.Translator && isVideoEnabled) {
+      console.log('ttt');
+      toggleVideoEnabled();
+    }
+  }, [userGroup, isVideoEnabled]);
 
   return (
     <div
