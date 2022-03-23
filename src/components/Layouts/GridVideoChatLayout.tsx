@@ -1,6 +1,6 @@
 import useParticipants from 'hooks/useParticipants/useParticipants';
 import useVideoContext from 'hooks/useVideoContext/useVideoContext';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useSessionContext from 'hooks/useSessionContext';
 import { ChooseableParticipant } from 'components/ChooseableParticipant';
 import { RevealedCard } from 'components/RevealedCard';

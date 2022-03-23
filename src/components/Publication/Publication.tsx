@@ -11,9 +11,8 @@ import {
   RemoteTrackPublication,
   Track,
 } from 'twilio-video';
-import { Transition } from '@headlessui/react';
-
-const Placeholder = () => <div className="h-full w-full bg-white rounded-xl absolute top-0" />;
+import { LoadingSpinner } from 'components/LoadingSpinner/LoadingSpinner';
+import { AppearAfter } from 'components/AppearAfter/AppearAfter';
 
 interface PublicationProps {
   publication: LocalTrackPublication | RemoteTrackPublication;
@@ -26,30 +25,23 @@ interface PublicationProps {
 export default function Publication({ publication, isLocalParticipant, videoPriority }: PublicationProps) {
   const track = useTrack(publication);
 
-  if (!track) return <Placeholder />;
+  //Shown during track loading
+  if (!track) {
+    return null;
+  }
 
   switch (track.kind) {
     case 'video':
       return (
-        <Transition
-          appear
-          show
-          className="transition-all duration-500 absolute w-full h-full"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <VideoTrack
-            track={track as IVideoTrack}
-            priority={videoPriority}
-            isLocal={!track.name.includes('screen') && isLocalParticipant}
-          />
-        </Transition>
+        <VideoTrack
+          track={track as IVideoTrack}
+          priority={videoPriority}
+          isLocal={!track.name.includes('screen') && isLocalParticipant}
+        />
       );
     case 'audio':
       return <AudioTrack track={track as IAudioTrack} />;
     default:
-      return <Placeholder />;
+      return null;
   }
 }

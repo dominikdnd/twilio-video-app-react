@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, RemoteVideoTrack } from 'twilio-video';
@@ -12,6 +12,10 @@ import usePublications from '../../hooks/usePublications/usePublications';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
 import { nameFromIdentity } from 'utils/participants';
+import { Transition } from '@headlessui/react';
+import AvatarIcon from 'icons/AvatarIcon';
+import { AppearAfter } from 'components/AppearAfter/AppearAfter';
+import { RenderIfTrue } from 'components/RenderIfTrue/RenderIfTrue';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -126,7 +130,7 @@ export default function ParticipantInfo({
 
   return (
     <div
-      className={clsx('rounded-xl', classes.container, {
+      className={clsx('rounded-xl absolute top-0 z-10', classes.container, {
         [classes.hideParticipant]: hideParticipant,
         [classes.cursorPointer]: Boolean(onClick),
       })}
@@ -162,20 +166,6 @@ export default function ParticipantInfo({
         <div>{isSelected && <PinIcon />}</div>
       </div>
       <div className={classes.innerContainer}>
-        {/* <Transition
-          show={!isVideoEnabled || isVideoSwitchedOff}
-          className="transition-all duration-1000 absolute w-full h-full"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="w-full h-full bg-black flex items-center justify-center rounded-xl">
-            <div className="w-12 h-12">
-              <AvatarIcon />
-            </div>
-          </div>
-        </Transition> */}
         {isParticipantReconnecting && (
           <div className="rounded-xl text-white absolute top-0 w-full h-full bg-black bg-opacity-60 flex items-center justify-center">
             Reconnecting...

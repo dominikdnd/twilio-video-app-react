@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect } from 'react';
 import { UserGroup } from 'types/UserGroup';
 import { reactivateSession, startSession } from 'utils/firebase/session';
 import useSessionContext from '../hooks/useSessionContext';
-import { LoadingSpinner } from './LoadingSpinner';
+import { LoadingSpinner } from './LoadingSpinner/LoadingSpinner';
 import { PopupScreen } from './PopupScreen';
 import { ISessionStatus } from './SessionProvider';
 

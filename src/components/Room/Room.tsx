@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import useSessionContext from 'hooks/useSessionContext';
 import { GridVideoChatLayout } from 'components/Layouts/GridVideoChatLayout';
 import { CarouselGameLayout } from 'components/Layouts/CarouselGameLayout';
 import { ScreenType } from 'types/ScreenType';
 import { UserGroup } from 'types/UserGroup';
-import { AudioTracks } from 'AudioTracks/AudioTracks';
+import { AudioTracks } from 'components/AudioTracks/AudioTracks';
 // import BackgroundSelectionDialog from 'components/BackgroundSelectionDialog/BackgroundSelectionDialog';
 
 const PoweredByBar = () => (
@@ -17,16 +17,15 @@ const PoweredByBar = () => (
 
 export default function Room() {
   const { activeScreen, userGroup } = useSessionContext();
+  const [activeComponent, setActiveComponent] = useState<ReactNode | null>(null);
 
-  const CurrentScreen = () => {
+  useLayoutEffect(() => {
     if (activeScreen === ScreenType.Game) {
-      return <CarouselGameLayout />;
+      setActiveComponent(<CarouselGameLayout />);
     } else if (activeScreen === ScreenType.VideoChat) {
-      return <GridVideoChatLayout />;
+      setActiveComponent(<GridVideoChatLayout />);
     }
-
-    return null;
-  };
+  }, [activeScreen]);
 
   return (
     <>
@@ -40,9 +39,7 @@ export default function Room() {
           }}
         >
           <ChatWindow />
-          <div className="px-5 container mx-auto lg:px-32">
-            <CurrentScreen />
-          </div>
+          <div className="px-5 container mx-auto lg:px-32">{activeComponent} </div>
           <PoweredByBar />
         </div>
         {/* <BackgroundSelectionDialog /> */}

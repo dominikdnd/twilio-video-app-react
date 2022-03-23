@@ -50,7 +50,7 @@ const ParticipantTracks = React.memo(
     // }
 
     return (
-      <div className="w-full h-full bg-black rounded-xl">
+      <div className="w-full h-full rounded-xl">
         {filteredPublications.map(publication => (
           <Publication
             key={publication.kind}
