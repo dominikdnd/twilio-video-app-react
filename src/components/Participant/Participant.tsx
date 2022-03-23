@@ -19,7 +19,6 @@ const BaseLayer = () => {
 
 export interface ParticipantProps {
   participant: IParticipant;
-  videoOnly?: boolean;
   enableScreenShare?: boolean;
   onClick?: () => void;
   // isSelected?: boolean;
@@ -34,7 +33,6 @@ export interface ParticipantProps {
 
 const Participant = ({
   participant,
-  videoOnly,
   // enableScreenShare,
   onClick,
   // isSelected,
@@ -61,7 +59,7 @@ const Participant = ({
       >
         <ParticipantTracks
           participant={participant}
-          videoOnly={videoOnly}
+          videoOnly={true}
           // enableScreenShare={enableScreenShare}
           videoPriority={videoPriority}
           isLocalParticipant={isLocalParticipant}

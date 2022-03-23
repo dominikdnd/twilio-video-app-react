@@ -56,9 +56,7 @@ export const GridVideoChatLayout = () => {
           <div className="flex space-x-6 items-start overflow-y-auto flex-grow">
             <div className="flex items-start space-x-8 pr-10">
               {moderatorParitcipants.map(participant => (
-                <>
-                  <LetterInfo isModerator participant={participant} key={participant.sid} />
-                </>
+                <LetterInfo isModerator participant={participant} key={participant.sid} />
               ))}
               {normalParticipants.map(participant => (
                 <LetterInfo participant={participant} key={participant.sid} />
