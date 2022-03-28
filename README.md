@@ -1,3 +1,39 @@
+# Live Streaming
+Currently there is a lot of manual work involved in creating a new live stream event. If there are 2 streams (translated and original) then the following procedure has to be done twice.
+
+### Get the live stream id from vimeo:
+![Screenshot 2022-03-22 at 07 44 36](https://user-images.githubusercontent.com/40560457/159423840-8f7ef441-5e56-45a2-b88a-429f260f25ad.png)
+
+### Add this map type property to the firebase session document and insert the stream id for the correct stream (translated / original language):
+![image](https://user-images.githubusercontent.com/40560457/159428253-a4a68a50-ef36-4a7c-bdc3-c8ee3a65f11d.png)
+
+### Add vimeo stream key to OBS:
+![Screenshot 2022-03-22 at 08 22 11](https://user-images.githubusercontent.com/40560457/159428859-4936ee8b-a79c-4105-b8e1-4e7192048b57.png)
+
+![Screenshot 2022-03-22 at 08 22 25](https://user-images.githubusercontent.com/40560457/159428894-8736f3f0-9a5a-4bfa-86ec-78a3ba092e54.png)
+
+Now you can insert the Stream Key into OBS (Settings->Stream->[Select Vimeo])
+
+### Browser Recording setup:
+Afterwards you can go back to your scene settings and add the "Browser" recording to the current scene. Insert the correct streamServer URL (translated / original) and append `?ignoreBrowserUnsupported=true`. Set the resolution to 1920x1080 and enable "Control audio via OBS".
+
+
+
+# Development
+You have to execute both of the following comments in seperate terminal instances to get the development environment to work:
+```
+yarn server
+```
+
+```
+yarn dev
+```
+
+
+
+
+
+
 # Twilio Video React App
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-app-react.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-app-react)
