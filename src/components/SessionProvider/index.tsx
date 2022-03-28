@@ -40,7 +40,7 @@ interface SessionProviderProps {
 }
 
 const updateDate = (prev: firestore.Timestamp | undefined, newDate: firestore.Timestamp | undefined) => {
-  if (!prev || (newDate && prev && prev.isEqual(newDate) === false) || (!prev && !newDate)) {
+  if (!prev || (newDate !== undefined && prev !== undefined && prev.isEqual(newDate) === false)) {
     return newDate;
   } else {
     return prev;
@@ -62,6 +62,7 @@ export const SessionProvider = React.memo(({ children }: SessionProviderProps) =
   const [streamId, setStreamId] = useState<string>();
   const [roomSid, setRoomSid] = useState<string>();
   const [moderators, setModerators] = useState<string[]>([]);
+
   const loadingRef = useRef<boolean>();
   loadingRef.current = loading;
 
@@ -97,9 +98,13 @@ export const SessionProvider = React.memo(({ children }: SessionProviderProps) =
     setStartDate(prev => updateDate(prev, store.data.startDate));
     setEndDate(prev => updateDate(prev, store.data.endDate));
 
-    if (store.data.moderators !== undefined && JSON.stringify(moderators) !== JSON.stringify(store.data.moderators)) {
-      setModerators(store.data.moderators);
-    }
+    setModerators(prev => {
+      if (store.data.moderators !== undefined && JSON.stringify(prev) !== JSON.stringify(store.data.moderators)) {
+        return store.data.moderators;
+      } else {
+        return prev;
+      }
+    });
 
     if (store.group === UserGroup.Audience) {
       setStreamId(store.data.streamIds?.original);
