@@ -113,9 +113,7 @@ export default function PreJoinScreens(props: { onReady?: (name: string) => void
   }, [userGroup, roomId]);
 
   useEffect(() => {
-    console.log(userGroup);
     if (userGroup === UserGroup.Translator && isVideoEnabled) {
-      console.log('ttt');
       toggleVideoEnabled();
     }
   }, [userGroup, isVideoEnabled]);

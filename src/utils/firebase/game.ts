@@ -36,7 +36,6 @@ export const fetchQuestions = (groupToken: string) =>
               }
             }
           });
-          console.log(allQuestions);
           resolve(allQuestions);
         }
       );
