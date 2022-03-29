@@ -21,10 +21,13 @@ export const createSession = (title: string, categoryStore: TCategoryStore, host
         .doc();
       const gameRef = sessionRef.collection('games').doc('carousel');
 
-      const shareTokens: Record<string, string> = {};
-      for (let group in UserGroup) {
-        shareTokens[randomString(10)] = group;
-      }
+      const shareTokens: Record<string, UserGroup> = {};
+      const readableShareTokens: Record<string, string> = {};
+      Object.entries(UserGroup).forEach(([key, value]) => {
+        const token = randomString(10);
+        shareTokens[token] = value;
+        readableShareTokens[token] = key;
+      });
 
       const sessionData: ISession = {
         author: uid,
@@ -53,7 +56,7 @@ export const createSession = (title: string, categoryStore: TCategoryStore, host
 
       resolve({
         sessionDocId: sessionRef.id,
-        shareTokens,
+        shareTokens: readableShareTokens,
       });
     });
   });

@@ -1,5 +1,5 @@
 import useSessionContext from 'hooks/useSessionContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { RemoteParticipant } from 'twilio-video';
 import { categorizeParticipants } from 'utils/participants';
 // import useDominantSpeaker from '../useDominantSpeaker/useDominantSpeaker';
@@ -24,7 +24,7 @@ export default function useParticipants() {
   //   }
   // }, [dominantSpeaker]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (room) {
       const participantConnected = (participant: RemoteParticipant) =>
         setParticipants(prevParticipants => [...prevParticipants, participant]);
